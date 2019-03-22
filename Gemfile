@@ -32,6 +32,12 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'pry-rails' # コンソールをpryに変更
+  gem 'better_errors' # エラー画面がデバッグしやすい形式に
+  gem 'binding_of_caller' # エラー画面でirbできる
+  gem 'annotate'  # 「rails route」がmodelに表示
+  gem 'letter_opener_web' # 開発環境におけるメール送信確認
+  gem 'bullet'  # N+1問題のクエリを警告
 end
 
 group :test do
