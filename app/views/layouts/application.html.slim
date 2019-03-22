@@ -1,12 +1,14 @@
 doctype html
 html
   head
-    title
-      | Myapp
+    title four hundred
     = csrf_meta_tags
     = csp_meta_tag
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
+    nav.navbar.navbar-light.bg-light
+      = link_to 'four hundred', users_path, class: 'navbar-brand'
+      = link_to '新規ユーザー登録', new_user_path, class: 'nav-item nav-link'
     .container
       = yield
