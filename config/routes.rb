@@ -16,5 +16,9 @@
 #      rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
 
 Rails.application.routes.draw do
-  resources :users
+  namespace :admin do
+    resources :users, except: [:new, :create]
+  end
+
+  resources :users, except: :index
 end
