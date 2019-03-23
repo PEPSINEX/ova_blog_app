@@ -67,4 +67,6 @@ Rails.application.configure do
     Bullet.console = true # ブラウザのコンソールログに記録
     Bullet.rails_logger = true # Railsログに出力
   end
+  # better_errors, binding_of_caller動作のため
+  BetterErrors::Middleware.allow_ip! "0.0.0.0/0"
 end
