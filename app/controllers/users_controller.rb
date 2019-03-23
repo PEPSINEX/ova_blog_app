@@ -1,8 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
-  add_flash_types :success, :danger
-
   def new
     @user = User.new
   end
