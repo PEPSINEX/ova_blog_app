@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :can_not_access_another_user, only: [:show, :edit, :update, :destroy]
 
   def new
     @user = User.new
@@ -40,5 +41,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def can_not_access_another_user
+    redirect_to root_path unless @user == current_user
   end
 end
