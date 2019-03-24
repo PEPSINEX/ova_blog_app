@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  skip_before_action :login_required, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :can_not_access_another_user, only: [:show, :edit, :update, :destroy]
 
@@ -14,6 +15,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
+      session[:user_id] = @user.id
       redirect_to @user, success: "#{User.model_name.human}登録をしました"
     else
       render :new
