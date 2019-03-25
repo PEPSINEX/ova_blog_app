@@ -22,10 +22,14 @@ class UsersController < ApplicationController
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.where(admin: false).find(params[:id])
   end
 
   def user_params
-    params.require(:user).permit(:name, :email)
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+
+  def can_not_access_another_user
+    redirect_to root_path unless @user == current_user || current_user.admin?
   end
 end
