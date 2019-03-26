@@ -25,9 +25,6 @@
 #      rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
 
 Rails.application.routes.draw do
-<<<<<<< HEAD
-  resources :users
-=======
   # 一時的なもの。後で修正
   root 'users#new'
   
@@ -41,5 +38,4 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   delete 'logout', to: 'sessions#destroy'
->>>>>>> f5167a1... ユーザー管理機能実装。テストまだ
 end
