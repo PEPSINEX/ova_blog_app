@@ -18,7 +18,11 @@
 
 FactoryBot.define do
   factory :user do
-    name { "MyString" }
-    email { "MyString" }
+    name { 'MyString' }
+    email { 'MyString' }
+    password { 'password' }
+    password_confirmation { 'password' }
+    admin { false }
+    is_enabled { true }
   end
 end
