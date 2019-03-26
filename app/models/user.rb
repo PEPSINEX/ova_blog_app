@@ -24,6 +24,7 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { minimum: 4 }
   validates :email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, length: { minimum: 8 }
+  validate :validate_image
 
   has_one_attached :image
 
@@ -31,5 +32,25 @@ class User < ApplicationRecord
 
   def set_not_admin
     self.admin = false
+  end
+
+  def validate_image
+    return unless image.attached?
+    
+    if image.blob.byte_size > 5.megabytes && !jpg_or_png?
+      image.purge
+      errors.add(:image, I18n.t('errors.messages.too_large'))
+      errors.add(:image, I18n.t('errors.messages.not_jpg_or_png'))
+    elsif image.blob.byte_size > 5.megabytes
+      image.purge
+      errors.add(:image, I18n.t('errors.messages.too_large'))
+    elsif !jpg_or_png?
+      image.purge
+      errors.add(:image, I18n.t('errors.messages.not_jpg_or_png'))
+    end
+  end
+  
+  def jpg_or_png?
+    %w[image/jpeg image/png].include?(image.blob.content_type)
   end
 end

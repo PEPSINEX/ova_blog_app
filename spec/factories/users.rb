@@ -18,8 +18,9 @@
 
 FactoryBot.define do
   factory :user do
-    name { 'MyString' }
-    email { 'MyString' }
+    name { 'ユーザーA' }
+    email { 'a@test.com' }
+    image {  }
     password { 'password' }
     password_confirmation { 'password' }
     admin { false }

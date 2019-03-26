@@ -32,8 +32,38 @@ describe 'ユーザー管理機能', type: :system do
         click_button '登録する'
       end
 
-      it '登録したユーザーの詳細画面が表示される' do
+      it '新規ユーザー作成画面に戻る' do
         expect(page).to have_content 'ユーザー登録'
+      end
+    end
+
+    context '画像が適切なとき' do
+      before do
+        fill_in '名前', with: 'ユーザーA'
+        fill_in 'メールアドレス', with: 'a@test.com'
+        attach_file 'プロフィール画像', "#{Rails.root}/spec/factories/cat_1.png"
+        fill_in 'パスワード', with: 'password'
+        fill_in 'パスワード再入力', with: 'password'
+        click_button '登録する'
+      end
+
+      it '登録したユーザーの詳細画面が表示される' do
+        expect(page).to have_content 'img', 'ユーザーA'
+      end
+    end
+
+    context '画像が不適切なとき' do
+      before do
+        fill_in '名前', with: 'ユーザーA'
+        fill_in 'メールアドレス', with: 'a@test.com'
+        attach_file 'プロフィール画像', "#{Rails.root}/spec/factories/big_and_mov_file.mov"
+        fill_in 'パスワード', with: 'password'
+        fill_in 'パスワード再入力', with: 'password'
+        click_button '登録する'
+      end
+
+      it '登録したユーザーの詳細画面が表示される' do
+        expect(page).to have_content '5MBより大きいファイルはアップロードできません', 'ユーザー登録'
       end
     end
   end

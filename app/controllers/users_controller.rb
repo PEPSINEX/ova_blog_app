@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :login_required, only: [:new, :create]
+  skip_before_action :disabled_user_can_not_access, only: [:new, :create]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :can_not_access_another_user, except: [:new, :create]
 
