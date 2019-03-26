@@ -27,6 +27,10 @@
 Rails.application.routes.draw do
   # 一時的なもの。後で修正
   root 'users#new'
+
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
   
   namespace :admin do
     resources :users, only: [:index, :edit, :activate] do
@@ -34,8 +38,5 @@ Rails.application.routes.draw do
     end
   end
   resources :users, except: :index
-
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  delete 'logout', to: 'sessions#destroy'
+  resources :blogs
 end

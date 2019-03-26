@@ -21,12 +21,13 @@ class User < ApplicationRecord
 
   has_secure_password
 
+  has_one_attached :image
+  has_many :blogs
+
   validates :name, presence: true, length: { minimum: 4 }
   validates :email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, length: { minimum: 8 }
   validate :validate_image
-
-  has_one_attached :image
 
   private
 
@@ -51,6 +52,6 @@ class User < ApplicationRecord
   end
   
   def jpg_or_png?
-    %w[image/jpeg image/png].include?(image.blob.content_type)
+    %w(image/jpeg image/png).include?(image.blob.content_type)
   end
 end
