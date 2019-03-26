@@ -25,6 +25,8 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: true, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i }
   validates :password, length: { minimum: 8 }
 
+  has_one_attached :image
+
   private
 
   def set_not_admin

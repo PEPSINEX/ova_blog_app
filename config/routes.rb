@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   root 'users#new'
   
   namespace :admin do
-    resources :users, except: [:new, :create, :show] do
+    resources :users, only: [:index, :edit, :activate] do
       post 'activate', on: :member
     end
   end
