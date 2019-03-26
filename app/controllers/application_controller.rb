@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def login_required
-    redirect_to login_path unless current_user
+    redirect_to login_path, danger: 'ログインが必要です' unless current_user
   end
 
   def disabled_user_can_not_access

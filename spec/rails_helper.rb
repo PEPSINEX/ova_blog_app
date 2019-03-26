@@ -41,6 +41,12 @@ Capybara.register_driver :selenium_remote do |app|
   url = "http://chrome:4444/wd/hub"
   opts = { desired_capabilities: :chrome, browser: :remote, url: url }
   driver = Capybara::Selenium::Driver.new(app, opts)
+  #リモートブラウザからファイルを読む設定
+  driver.browser.file_detector = lambda do |args|
+    str = args.first.to_s
+    str if File.exist? str
+  end
+  driver
 end
 
 RSpec.configure do |config|
