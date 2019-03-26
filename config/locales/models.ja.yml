@@ -12,4 +12,6 @@ ja:
         created_at: '登録日時'
         updated_at: '更新日時'
         is_enabled: 'アカウント状態'
-        
+      article:
+        title: タイトル
+        content: 内容

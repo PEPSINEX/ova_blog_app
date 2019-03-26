@@ -39,4 +39,5 @@ Rails.application.routes.draw do
   end
   resources :users, except: :index
   resources :blogs
+  resources :articles
 end
