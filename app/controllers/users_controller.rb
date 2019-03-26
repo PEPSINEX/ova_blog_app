@@ -1,44 +1,31 @@
 class UsersController < ApplicationController
-  skip_before_action :login_required, only: [:new, :create]
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :can_not_access_another_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_blog, only: [:show]
+
+  def index
+    @users = User.all
+  end
 
   def new
     @user = User.new
   end
 
-  def edit
+  def show
   end
-
 
   def create
     @user = User.new(user_params)
 
     if @user.save
-      session[:user_id] = @user.id
-      redirect_to @user, success: "#{User.model_name.human}登録をしました"
+      redirect_to users_path
     else
       render :new
     end
   end
 
-  def update
-    if @user.update(user_params)
-      redirect_to @user, success: "#{User.model_name.human}を更新しました"
-    else
-      render :edit
-    end
-  end
-
-  def destroy
-    @user.destroy
-    redirect_to new_user_path, danger: "#{User.model_name.human}を削除しました"
-  end
-
   private
 
   def set_user
-    @user = User.find(params[:id])
+    @user = User.where(admin: false).find(params[:id])
   end
 
   def user_params
@@ -46,6 +33,6 @@ class UsersController < ApplicationController
   end
 
   def can_not_access_another_user
-    redirect_to root_path unless @user == current_user
+    redirect_to root_path unless @user == current_user || current_user.admin?
   end
 end

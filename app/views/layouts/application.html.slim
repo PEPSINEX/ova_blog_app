@@ -7,9 +7,12 @@ html
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   body
-    nav.nav.bg-light
+    nav.nav.bg-light.mb-3
       = link_to 'four hundred', '#' , class: 'nav-link active'
-      - if current_user
+      - if current_user&.admin?
+        = link_to 'ユーザー一覧', admin_users_path, class: 'nav-link'
+        = link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
+      - elsif current_user
         = link_to 'ユーザー詳細', user_path(current_user), class: 'nav-link'
         = link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
       - else

@@ -5,6 +5,7 @@
 #  id              :bigint(8)        not null, primary key
 #  admin           :boolean          default(FALSE), not null
 #  email           :string           default(""), not null
+#  is_enabled      :boolean          default(TRUE), not null
 #  name            :string           default(""), not null
 #  password_digest :string           default(""), not null
 #  created_at      :datetime         not null
