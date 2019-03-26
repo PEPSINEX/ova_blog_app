@@ -16,6 +16,7 @@ html
         = link_to 'ユーザー詳細', user_path(current_user), class: 'nav-link'
         = link_to 'ログアウト', logout_path, method: :delete, class: 'nav-link'
       - else
+        = link_to 'ユーザー登録', new_user_path, class: 'nav-item nav-link'
         = link_to 'ログイン', login_path, class: 'nav-item nav-link'
     .container
       - flash.each do |key, value|
