@@ -5,6 +5,7 @@ table.table.table-hover.table-sm
     tr
       th= Article.human_attribute_name(:title)
       th= Article.human_attribute_name(:content)
+      th= Article.human_attribute_name(:updated_at)
       th
 
   tbody
@@ -12,6 +13,23 @@ table.table.table-hover.table-sm
       tr
         td = article.title
         td = article.content.truncate(40)
+        td = I18n.l article.updated_at
         td = link_to '詳細', article
 
 = link_to '記事作成', new_article_path
+
+h3 検索
+= form_with url: articles_path, method: :get, local: true do |f|
+  .form-group
+    = f.label '著者'
+    = f.text_field 'users.name', class: 'form-control'
+  .actions
+    = f.label 'タイトル'
+    = f.text_field :title, class: 'form-control'
+  .actions
+    = f.label '内容'
+    = f.text_field :content, class: 'form-control'
+  .actions
+    = f.submit nil, class: 'btn btn-primary' 
+
+= link_to '検索をリセット', articles_path
