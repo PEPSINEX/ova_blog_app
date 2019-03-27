@@ -1,29 +1,17 @@
-h1 Listing articles
+h1 #{Article.model_name.human}一覧
 
-table
-  thead
+table.table.table-hover.table-sm
+  thead.thead-default
     tr
-      th Title
-      th Content
-      th User
-      th Blog
-      th Is published
-      th
-      th
+      th= Article.human_attribute_name(:title)
+      th= Article.human_attribute_name(:content)
       th
 
   tbody
     - @articles.each do |article|
       tr
         td = article.title
-        td = article.content
-        td = article.user
-        td = article.blog
-        td = article.is_published
-        td = link_to 'Show', article
-        td = link_to 'Edit', edit_article_path(article)
-        td = link_to 'Destroy', article, data: { confirm: 'Are you sure?' }, method: :delete
+        td = article.content.truncate(40)
+        td = link_to '詳細', article
 
-br
-
-= link_to 'New Article', new_article_path
+= link_to '記事作成', new_article_path

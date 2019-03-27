@@ -1,24 +1,17 @@
-= form_for @article do |f|
-  - if @article.errors.any?
-    #error_explanation
-      h2 = "#{pluralize(@article.errors.count, "error")} prohibited this article from being saved:"
-      ul
-        - @article.errors.full_messages.each do |message|
-          li = message
+- if article.errors.present?
+  ul#error_explanation
+    - article.errors.full_messages.each do |message|
+      li = message
 
-  .field
+= form_with model: article, local: true  do |f|
+  .form-group
     = f.label :title
-    = f.text_field :title
+    = f.text_field :title, class: 'form-control'
   .field
     = f.label :content
-    = f.text_area :content
-  .field
-    = f.label :user
-    = f.text_field :user
-  .field
-    = f.label :blog
-    = f.text_field :blog
+    = f.text_area :content, class: 'form-control'
   .field
     = f.label :is_published
     = f.check_box :is_published
-  .actions = f.submit
+  .actions
+    = f.submit nil, class: 'btn btn-primary' 

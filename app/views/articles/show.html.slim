@@ -1,21 +1,22 @@
-p#notice = notice
+h1 #{Article.model_name.human}詳細
 
-p
-  strong Title:
-  = @article.title
-p
-  strong Content:
-  = @article.content
-p
-  strong User:
-  = @article.user
-p
-  strong Blog:
-  = @article.blog
-p
-  strong Is published:
-  = @article.is_published
+table.table.table-hover
+  tbody
+    tr
+      th= Article.human_attribute_name(:title)
+      td= @article.title
+    tr
+      th= Article.human_attribute_name(:content)
+      td= @article.content
+    tr
+      th= Article.human_attribute_name(:created_at)
+      td= I18n.l @article.created_at
+    tr
+      th= Article.human_attribute_name(:updated_at)
+      td= I18n.l @article.updated_at
+    tr
+      th= Article.human_attribute_name(:is_published)
+      td= @article.is_published? ? '公開' : '下書き'
 
-=> link_to 'Edit', edit_article_path(@article)
-'|
-=< link_to 'Back', articles_path
+= link_to '編集', edit_article_path(@article), class: 'btn btn-primary mr-3'
+= link_to '削除', article_path(@article), method: :delete, data: { confirm: "ユーザー「#{@article.title}」を削除します。よろしいですか？" }, class: 'btn btn-danger'

@@ -1,17 +1,21 @@
 ja:
   activerecord:
     models: 
-      user: 'ユーザー'
+      user: ユーザー
+      article: 記事
     attributes:
       user:
-        name: '名前'
-        email: 'メールアドレス'
-        image: 'プロフィール画像'
-        password: 'パスワード'
-        password_confirmation: 'パスワード再入力'
-        created_at: '登録日時'
-        updated_at: '更新日時'
-        is_enabled: 'アカウント状態'
+        name: 名前
+        email: メールアドレス
+        image: プロフィール画像
+        password: パスワード
+        password_confirmation: パスワード再入力
+        created_at: 登録日時
+        updated_at: 更新日時
+        is_enabled: アカウント状態
       article:
         title: タイトル
         content: 内容
+        is_published: 公開状態
+        created_at: 登録日時
+        updated_at: 更新日時
